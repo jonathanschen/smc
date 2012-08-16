@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div id="content" class="span9">
+			<ul class="thumbnails">
+				<li class="span9">
+					<div class="thumbnail">
+						<a href="detail.html">
+							<img alt="thumbnail" src="{% static "img/bootstrap-mdo-sfmoma-03.jpg" %}">
+						</a>
+						<div class="category"><i class="icon-tag icon-white"></i> 
+							<a href="#">Photoshop</a>
+							<a href="#">Typography</a>
+						</div>
+						<div class="caption">
+							<h2>Contact</h2>
+							<div class="alert alert-error">
+								<button class="close" data-dismiss="alert" type="button">×</button>
+								<strong>Oh snap!</strong>Change a few things up and try submitting again.
+							</div>
+							<div class="alert alert-success">
+								<button class="close" data-dismiss="alert" type="button">×</button>
+								<strong>Well done!</strong>
+								Your message sent successfully.
+							</div>
+							<form class="form-horizontal">
+								<fieldset>
+									<div class="control-group">
+										<label class="control-label" for="input01">E-mail</label>
+										<div class="controls">
+											<input id="input01" class="input-xlarge" type="email">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="input02">Name</label>
+										<div class="controls">
+											<input id="input02" class="input-xlarge" type="text">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="textarea">Message</label>
+										<div class="controls">
+											<textarea id="textarea" class="input-xlarge" rows="3"></textarea>
+										</div>
+									</div>
+									<div id="contact-submit" class="form-actions">
+										<button class="btn btn-inverse" type="submit">Send!</button>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}

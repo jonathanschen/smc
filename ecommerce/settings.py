@@ -1,9 +1,11 @@
 import os
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__).decode('utf-8'))
 
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 DEBUG = True
+THUMBNAIL_DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
+URL = 'http://127.0.0.1:8000/'
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -28,7 +30,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/New_York'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -49,18 +51,17 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(CURRENT_PATH, 'ecommerce', 'store', 'static')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
-
+MEDIA_URL = '/media/'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/Users/jonathanschen/Python/projects/skeleton/ecommerce/static'
+STATIC_ROOT = '/Users/jonathanschen/Python/projects/skeleton/ecommerce/ecommerce/store/static'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -122,8 +123,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'ecommerce.store',
 	'ecommerce.accounts',
+	'ecommerce.cart',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+	'registration',
+	'sorl.thumbnail',
+	'paypal.standard',
+	'paypal.pro',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -157,4 +163,15 @@ LOGGING = {
     }
 }
 
-LOGIN_REDIRECT_URL = 'accounts/my_account'
+PAYPAL_RECEIVER_EMAIL = 'jsc37_1345062968_biz@gmail.com'
+PAYPAL_TEST = True
+PAYPAL_WPP_USER = 'jsc37_1345062968_biz_api1.gmail.com'
+PAYPAL_WPP_PASSWORD = '1345062991'
+PAYPAL_WPP_SIGNATURE = 'ALBsd9K1rmWR.udv3uRzD1e0fV6RAY6cC7rjgrI9zyC9wJQSPeLu4cV5'
+LOGIN_REDIRECT_URL = '../my_account/'
+ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ldb102082@gmail.com'
+EMAIL_HOST_PASSWORD = '@Pingan82'
+EMAIL_PORT = 587

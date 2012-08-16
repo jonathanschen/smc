@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container">
 	<h1>{{ c.name }}
 	<br />
 	<br />
 	{% for item in items %}
 		<div class="product_thumbnail">
 			<a href="{{ item.get_absolute_url }}">
-				<img src="{{ MEDIA_URL }}images/products/thumbnails/{{ item.image }}"
+				<img src="{{ STATIC_URL }}img/{{ item.image }}"
 				alt="{{ item.name }}" class="bn" />
 				<br />
 				{{ item.name }}
 			</a>
 		</div>
 	{% endfor %}
+</div>
 {% endblock %}
 				

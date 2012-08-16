@@ -8,21 +8,74 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 import time 
 from calendar import month_name
+from django.core import urlresolvers
+from ecommerce.cart import cart
+from django.http import HttpResponseRedirect
+from ecommerce.store.forms import ItemAddToCartForm
+from ecommerce.accounts.models import UserProfile
+from ecommerce.store.forms import AddItem
+from django.template.defaultfilters import slugify
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.contrib.auth import logout
+
 
 def index(request):
-	page_title = 'Pursaholic Paradise'
-	items = Item.objects.all()
-	return render_to_response('index.html', locals())
+	page_title = 'TaiDai Heaven'
+	items = Item.objects.all().order_by("-created")
+	paginator = Paginator(items, 12)
+	
+	try: 
+		page = int(request.GET.get("page", "1"))
+	except ValueError: 
+		page = 1
+	
+	try:
+		items = paginator.page(page)
+	except:
+		items = paginator.page(paginator.num_pages)
+		
+	return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+
+def sell(request):
+	if request.method == "POST":
+		form = AddItem(request.POST, request.FILES)
+		if form.is_valid():
+			item = form.save(commit=False)
+			item.user = request.user
+			item.is_active = True
+			item.slug = slugify(item.name)
+			item.save()
+			return HttpResponseRedirect('thanks.html')		
+	if request.user.is_authenticated():
+		form = AddItem()
+		return render_to_response('forsale.html', locals(), context_instance=RequestContext(request))
+	else:
+		url = urlresolvers.reverse('registration.views.register')
+		return HttpResponseRedirect(url)
 
 def show_category(request, category_slug):
 	c = get_object_or_404(Category, slug=category_slug)
 	items = c.item_set.all()
 	page_title = c.name
-	return render_to_response('category.html', locals())
+	return render_to_response('category.html', locals(), context_instance=RequestContext(request))
 
 def show_item(request, item_slug):
-	i = get_object_or_404(Item, slug=item_slug)
-	categories = i.categories.filter(is_active=True)
-	page_title = i.name
-	return render_to_response('item.html', locals())
+	item = get_object_or_404(Item, slug=item_slug)
+	categories = item.categories.all()
+	page_title = item.name
+	if request.method == 'POST':
+		postdata = request.POST.copy()
+		form = ItemAddToCartForm(request, postdata)
+		if form.is_valid():
+			cart.add_to_cart(request)
+			if request.session.test_cookie_worked():
+				request.session.delete_test_cookie()
+			url = urlresolvers.reverse('show_cart')
+			return HttpResponseRedirect(url)
+	else:
+		form = ItemAddToCartForm(request=request, label_suffix=':')
+	form.fields['item_slug'].widget.attrs['value'] = item_slug
+	request.session.set_test_cookie()
+	return render_to_response('item.html', locals(), context_instance=RequestContext(request))
+
 

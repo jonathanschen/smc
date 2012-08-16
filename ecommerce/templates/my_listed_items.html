@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for items in items_selling %}
+<div class="container">
+<p>{{ items }}</p>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+		<div class="span12 middle">
+				<table class="table table-striped">
+					<tr>
+						<th>Item</th>
+						<th>Unit Price</th>
+						<th>Qty</th>
+						<th>Update?</th>
+						<th>Remove?</th>
+						<th>Total</th>
+					</tr>
+<tbody>
+	{% for item in cart_items %} 
+		<tr>
+			<td>
+			<a href="{{ item.get_absolute_url }}" class="cart"> {{ item.name }}</a>
+			</td>
+			<td>
+			${{ item.price }}
+			</td>
+			<td class="right">
+				<form method="post" action="." class="cart">{% csrf_token %}
+					<input type="text" name="quantity" value="{{ item.quantity }}" 	
+					id="quantity" size="2" class="quantity" maxlength="5" />
+				<input type="hidden" name="item_id" value="{{ item.id }}" /> 
+			</td>
+			<td>
+				<input type="submit" name="submit" value="Update" />
+				</form>
+			</td>
+			<td>
+				<form method="post" action="." class="cart">{% csrf_token %}
+					<input type="hidden" name="item_id" value="{{ item.id }}" /> <input 			
+					type="submit" name="submit" value="Remove"/>
+				</form>
+			</td>
+			<td>
+			{{ item.total }}
+			</td>
+		</tr>
+		{% endfor %} 
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>
+			<h3>Subtotal:</h3>
+		</td>
+		<td>	
+			<h3> {{ cart_subtotal }} </h3>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td class="align-right">
+	    		<a href="/cart/checkout/" class="btn btn-inverse btn-large">Go to Checkout</a>
+		</td>
+	</tr>
+	</tbody>
+</table>
+	
+</div>
+	</div>
+    </div>
+</div>
+
+{% endblock %}

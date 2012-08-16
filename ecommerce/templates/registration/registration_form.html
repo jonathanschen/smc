@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+<div class="span12">
+	<div id="signup" class="span4 offset3 well">
+		<h3>Sign Up</h3>
+		<form method="post" action="">{% csrf_token %}
+			<strong>Username</strong>
+			<div class="input-prepend">
+				<span class="add-on">
+					<i class="icon-user"></i>
+				</span>
+				{{ form.username }}
+			</div>
+			<span class="helptext">Letters, digits and @/./+/-/_ only.</span>
+			<div id="username_status" class=""></div>
+			<strong>E-mail address</strong> 
+			<div class="input-prepend">
+				<span class="add-on">
+					<i class="icon-envelope"></i>
+				</span>
+				{{ form.email }}
+			</div>
+			<div id="hint"></div>
+			<strong>Password</strong>
+			<div class="input-prepend">
+				<span class="add-on">
+					<i class="icon-exclamation-sign"></i>
+				</span>
+				{{ form.password1}}
+			</div>
+			<strong>Password again</strong>
+			<div class="input-prepend">
+				<span class="add-on">
+					<i class="icon-exclamation-sign"></i>
+				</span>
+				<input type="password" name="password2" id="id_password1" />
+			</div>
+		<button type="submit" class="btn btn-inverse btn-large">Submit</button>
+		</form>
+	</div>
+</div>
+</div>
+
+{% endblock %}

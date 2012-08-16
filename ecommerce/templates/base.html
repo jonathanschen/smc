@@ -1,96 +1,171 @@
 <!DOCTYPE html>
+
 {% load staticfiles %}
+
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Jonathan Chen's Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    
-  </head>
-
+	<head>
+		<meta charset="utf-8">
+		<title>Jonathan Chen's Portfolio</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<!-- Le styles -->
+		<link href="{% static 'css/style.css' %}" rel="stylesheet">
+		<style type="text/css">
+		body {
+			padding-top: 60px;
+			padding-bottom: 40px;
+			}
+		</style>
+		<link href="{% static 'css/style.css' %}" rel="stylesheet">
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<!-- Le fav and touch icons -->
+		<link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+		<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="../assets/ico/apple-touch-icon-144-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114"
+		href="../assets/ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="../assets/ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed"
+		href="../assets/ico/apple-touch-icon-57-precomposed.png">
+	</head>
 <body>
+<div class="navbar navbar-fixed-top">
+	<div class="container">
+		<a class="brand" href="#">TaiDai Heaven</a>
+		<ul class="nav">
+			<li>
+				<a href="{% url ecommerce.store.views.index %}">Home</a>
+			</li>
+			<li>
+				<a href="{% url ecommerce.store.views.index %}">Buy</a>
+			</li>
+			<li>
+				<a href="{% url ecommerce.store.views.sell %}">Sell</a>
+			</li>
+			<li>
+				<a href=>Blog</a>
+			</li>
+		</ul>
+		{% if not user.is_authenticated %}
+			<ul class="nav pull-right">
+				<li id="login_menu" class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="/accounts/login/"
+					style="padding-right: 16px;height:100%"><strong>Sign in</strong><span
+					class="caret" /></a>
+					<ul class="dropdown-menu dropdown-form">
+						<li>
+							<form action="/accounts/login/" method="post">{% csrf_token %}
+								{{ form.as_table}}
+								<button type="submit" class="btn btn-secondary">Submit</button>
+							</form>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		{% else %}
+			<ul class="nav pull-right">
+				<li><a href="{% url ecommerce.cart.views.show_cart %}">Cart</a></li>
+				<li id="login_menu" class="dropdown">
+					<a class="dropdown-toggle" style="padding-right: 16px;height:100%"
+					data-target="#" data-toggle="dropdown"><strong>{{ user }}</strong><b
+					class="caret" /></b></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="iconed" href="/purchases/">
+								<i class="icon-shopping-cart"></i>
+								My Purchases
+							</a>
+						</li>
+						<li>
+							<a class="iconed" href="/orders/">
+								<i class="icon-inbox"></i>
+								My Orders
+							</a>
+						</li>
+						<li>
+							<a class="iconed" href="/accounts/my_items/">
+								<i class="icon-tags"></i>
+								My Purses
+							</a>
+						</li>
+						<li>
+							<a class="iconed" href="{% url ecommerce.accounts.views.my_account %}">
+								<i class="icon-cog"></i>
+								Settings
+							</a>
+						</li>
+						<li>
+							<a class="logout iconed" style="border-bottom:0" href="/accounts/logout/">
+								<i class="icon-off"></i>
+								Logout
+							</a>
+						</li>
+					</ul><!--end drop down menu-->
+				</li><!-- end login menu-->
+			</ul> <!-- end nav pull right-->
+		{% endif %}
+	</div><!--end container-->
+</div><!--end navbar fixed-->
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Store</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li><a href="#"><i class="icon-home icon-white"></i>Home</a></li>
-              <li><a href=#>Buy</a></li>
-              <li><a href=#>Sell</a></li>
-              <li><a href=>Blog</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+<div class="container">
+	<div class="row">	
+		<div class="span3">
+			<a href="{% url ecommerce.store.views.index %}"><h1>TaiDai Heaven</h1></a>
+			{% if not user.is_authenticated %}
+			<a href="{% url registration.views.register %}"><input class="btn btn-inverse btn-large" value="Sign up Here!" /></a>
+			{% endif %}
+		</div>
+		<div class="span9">
+			<p class="pull-right">
+				<a class="twitter" href="#" ><img src="{% static 'img/social/twitter.png' %}" alt="twitter" /></a>
+				<a class="fb" href="#"><img src="{% static 'img/social/facebook.png' %}" alt="fb" /></a>
+				<a class="email" href="#"><img src="{% static 'img/social/email.png' %}" alt="email" /></a>
+				<a class="linkedin" href="#"><img src="{% static 'img/social/linkedin.png' %}" alt="linkedin" /></a>
+				<a class="pinterest" href="#"><img src="{% static 'img/social/pinterest.png' %}" alt="pinterest" /></a>
+				<a class="rss" href="#"><img src="{% static 'img/social/rss.png' %}" alt="rss" /></a>
+			</p>
+		</div><!--end span9-->
+	</div><!--end row-->
+	<hr>
+</div><!--end container-->
 
 
+		
 {% block content %}
 {% endblock %}
-    
+
 
 <footer>
-	<div class="footer-inner">
 		<div class="container">
 			<div class="row">
-				<div class="span3">
+				<div class="span4">
 					<h4>Copyright &copy; 2012 JSC Ventures</h4>
 					<br>
 					All right are reserved.
 					<br>
 					<a href="#">Terms of Service</a>
-					|
 					<a href="#">Privacy Policy</a>
 				</div>
-				<div class="span3">
+				<div class="span4">
 					<h4>Contact Info</h4>
 					<br>
 					<a href = 'jonathanschen@gmail.com'>jonathanschen@gmail.com</a>
-					<p>T: 2012481556</p> 
+					<p>T: 2012481556</p>
 				</div>
-				<div class="span3">
+				<div class="span4">
 					<h4>Quick Navigation</h4>
 					<br>
 					<ul>
 						<li>
-							<a href=#></a>
-						</li>
-						<li>
 							<a href="/about/">About</a>
 						</li>
 						<li>
-							<a href="/blog/">Blog</a>
+							<a href=#>Blog</a>
 						</li>
 						<li>
 							<a href="/contact/">Contact</a>
@@ -99,24 +174,22 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </footer>
- 
 </body>
-      <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{% static 'js/jquery.js' %}"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="{% static 'js/bootstrap-carousel.js' %}"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
+	<!-- Le javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap-transition.js' %}"></script>
+	<script src="{% static 'js/bootstrap-alert.js' %}"></script>
+	<script src="{% static 'js/bootstrap-modal.js' %}"></script>
+	<script src="{% static 'js/bootstrap-dropdown.js' %}"></script>
+	<script src="{% static 'js/bootstrap-scrollspy.js' %}"></script>
+	<script src="{% static 'js/bootstrap-tab.js' %}"></script>
+	<script src="{% static 'js/bootstrap-tooltip.js' %}"></script>
+	<script src="{% static 'js/bootstrap-popover.js' %}"></script>
+	<script src="{% static 'js/bootstrap-button.js' %}"></script>
+	<script src="{% static 'js/bootstrap-collapse.js' %}"></script>
+	<script src="{% static 'js/bootstrap-carousel.js' %}"></script>
+	<script src="{% static 'js/bootstrap-typeahead.js' %}"></script>
 </html>

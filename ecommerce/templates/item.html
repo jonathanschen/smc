@@ -1,30 +1,98 @@
 {% extends "base.html" %}
 
+{% load thumbnail %}
+
 {% block content %}
-	<div class="product_image">
-		<img src="{{ MEDIA_URL }}images/items/main/{{ i.image }}" alt="{{ i.name }}" />
-	</div>
-	<h1>{{ i.name }}</h1>
-	Brand: <em>{{ i.brand }}</em>
-	<br />
-	<br />
-	In categor{{ categories.count|pluralize:"y,ies"}}:
-		{% for c in categories %}
-	<a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-	{% if not forloop.last %}, {% endif %}
-		{% endfor %}
-		<br />
-		<br />
-	Price: ${{ i.price }}
-		<br />
-		<br />
-	[add to cart button]
-		<br />
-		<br />
-	<div class="cb">
-		<br />
-		<br />
-	</div>
-	<h3>Product Description</h3>
-		{{ i.description }}
+
+<div class="container">
+	<div class="row">
+		<div id="title" class="span12">
+			<h2>{{ item.name }}</h2>
+				<br />
+				<br />
+		</div>
+		<div class="span7">
+			<div class="slider-inner">
+						<div id="slider" class="carousel slide">
+							<div class="carousel-inner">
+								<div class="active item">
+									{% thumbnail item.image1 "620x372" crop='center' as im %}
+									<img src='{{ MEDIA_URL }}{{ item.image1 }}'
+									width = '{{ im.width }}' height= "{{ im.height }}"
+									alt="{{ item.name }}" class="bn" />
+									{% endthumbnail %}
+								</div>
+								{% if item.image2 %}
+								<div class="item">
+								{% thumbnail item.image2 "620x372" crop='center' as im %}
+									<img src='{{ MEDIA_URL }}{{ item.image2 }}'
+									width = '{{ im.width }}' height= "{{ im.height }}"
+									alt="{{ item.name }}" class="bn" />
+								{% endthumbnail %}
+								</div>
+								{% endif %}
+								{% if item.image3 %}
+								<div class="item">
+								{% thumbnail item.image3 "620x372" crop='center' as im %}
+									<img src='{{ MEDIA_URL }}{{ item.image3 }}'
+									width = '{{ im.width }}' height= "{{ im.height }}"
+									alt="{{ item.name }}" class="bn" />
+								{% endthumbnail %}
+								</div>
+								{% endif %}
+							</div><!-- end carousel inner-->
+						{% if item.image2 %}
+						<a class="carousel-control left" data-slide="prev" href="#slider">&lsaquo;</a>
+						<a class="carousel-control right" data-slide="next" href="#slider">&rsaquo;</a>
+						{% endif %}
+						</div><!--end carousel slide-->
+					</div> <!--close slider-inner-->
+					<h4>{{ item.description }}</h4>
+					<div id="comments">
+						<h3>Comments</h3>
+						<script>
+							$(function() {
+								$('.reply').click(function() {
+									$(this).next('.reply-form').toggle();
+								});
+							});
+						</script>
+						<style>.input_id_honeypot {display:none !important;}</style>
+						<ul class="unstyled">
+							<li>0 comments :(</li>
+						</ul>
+						<form method="post" id="comment" action="/comment/#comment">{% csrf_token %}
+							<div class="control-group input_id_comment">
+								<label for="id_comment">Comment</label>
+								<div class="controls">
+									<textarea id="id_comment" rows="10" cols="40" name="comment"></textarea>
+									<span class="help-inline"></span>
+								</div>
+							</div>
+							<div class="form-actions">
+								<input class="btn btn-inverse btn-large" type="submit" value="Comment">
+							</div>
+						</form>
+					</div> <!--end coments-->
+				</div><!--end span7-->
+				<div class="span5">
+					<div class="well">
+						<div style="margin-bottom:1em">
+        					<span class="price">{{ item.price }}</span>+ shipping
+						</div>  
+					</div>
+					<div class="control-group input_id_quantity ">
+						<form method="post" action="." class="cart">{% csrf_token %}
+							{{ form.as_p }}
+							<br />
+							<input type="submit" class="btn btn-inverse btn-large" value="Add To Cart"
+							name="submit" alt="Add to Cart" />
+						</form>
+					</div>
+					<p>$4.30 for shipping</p>
+				</div> <!--end span5-->
+			</div>
+	</div><!--end row-->
+</div><!--end scontainer-->	
+
 {% endblock %}

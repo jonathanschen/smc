@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if account %}
+<div class="container">
+	<p>Account successfully activated</p>
+	<p><a href="{% url auth_login %}"></a></p>
+{% else %}
+	<p>Account activation failed</p>
+{% endif %}
+</div>
+
+{% endblock %}

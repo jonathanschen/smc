@@ -1,18 +1,69 @@
 {% extends "base.html" %}
 
+{% load thumbnail %}
+
 {% block content %}
-	<h1>{{ c.name }}</h1>
-	{{ c.description }}
-	<br />
-	<br />
-	{% for item in items %}
-		<div class='item_thumbnail'>
-			<a href='{{ item.get_absolute_url }}'>
-				<img src='{{ MEDIA_URL }}images/items/thumbnails/{{ item.image }}'
-				alt="{{ item.name }}" class="bn" />
-				<br />
-				{{ item.name }}
-			</a>
+
+<div class="container">
+
+
+
+
+	<div class="row">
+		<div id="content" class="span12">
+			<ul class="thumbnails">
+				{% for item in items %}
+				<li class="span3">
+					<div class="thumbnail">
+						{% thumbnail item.image1 "275x150" crop='center' as im %}
+							<a href='{{ item.get_absolute_url }}'> 
+								<img src='{{ MEDIA_URL }}{{ item.image1 }}' 
+								width = '{{ im.width }}' height= "{{ im.height }}"
+								alt="{{ item.name }}" class="bn" />
+							</a>
+						{% endthumbnail %}
+						<div class="category">
+							<i class="icon-tag icon-white"></i>
+							<a href="#">Dresses</a>
+							<a href="#">Shirts</a>
+						</div>
+						<div class="caption">
+							<h2>item.title</h2>
+							<p>item.description</p> <!-- make this a maximum of 3 lines???-->	
+							<hr>
+							<p><a class="btn" href="{{ item.get_absolute_url }}">Read on →</a></p>
+						</div>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
 		</div>
-	{% endfor %}
+	</div>
+
+
+<div class="span12">
+	<div class="pagination">
+	{% if items.paginator.num_pages > 1 %}
+	<div class="pagination" style="margin-top: 20px; margin-left: -20px; ">
+		<span class="step-links">
+			{% if items.has_previous %}
+				<a href= "?page={{ items.previous_page_number }}">newer entries &lt;&lt; </a>
+			{% endif %}
+			<span class="current">
+				&nbsp;Page {{ items.number }} of {{ items.paginator.num_pages }}
+			</span>
+			
+			{% if items.has_next %}
+				<a href="?page={{ items.next_page_number }}"> &gt;&gt; older entries</a>
+			{% endif %}
+		</span>
+	</div>
+	{% endif %}
+	</div>
+</div>
+	</div>
+	</div>
+</div>
+
+
 {% endblock %}
