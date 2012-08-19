@@ -1,5 +1,5 @@
-import os
 import dj_database_url
+import os
 
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__).decode('utf-8'))
 
@@ -9,14 +9,13 @@ THUMBNAIL_DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 URL = 'http://127.0.0.1:8000/'
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    # ('Jonathan Chen', 'jonathanschen@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
-DATABASES = {'default': dj_database_url.config(default='postgres://localhost'),
+DATABASES = {'default': dj_database_url.config(default='postgres://localhost'),}
 
-}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -125,7 +124,7 @@ INSTALLED_APPS = (
 	'sorl.thumbnail',
 	'paypal.standard',
 	'paypal.pro',
-#	'disqus',
+	'disqus',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
