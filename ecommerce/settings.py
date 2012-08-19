@@ -121,8 +121,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 	'registration',
 	'sorl.thumbnail',
-	'paypal.standard',
-	'paypal.pro',
+	'ecommerce.paypal.standard',
+	'ecommerce.paypal.pro',
 #	'disqus',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
