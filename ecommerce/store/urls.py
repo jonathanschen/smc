@@ -7,6 +7,7 @@ urlpatterns = patterns('ecommerce.store.views',
 	url(r'^category/(?P<category_slug>[-\w]+)/$', 'show_category'),
 	url(r'^item/(?P<item_slug>[-\w]+)/$', 'show_item'),
 	url(r'^contact/$', 'contact'),
+	url(r'^blog/$', 'blog'),
 	url(r'^thanks/$', direct_to_template, {'template':'thanks.html'}),
 	url(r'^success/$', direct_to_template, {'template':'success.html'}),
 

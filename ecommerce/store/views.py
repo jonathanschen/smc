@@ -51,6 +51,10 @@ def sell(request):
 	else:
 		form = AddItem()
 	return render_to_response('forsale.html', locals(), context_instance=RequestContext(request))
+	
+def blog(request):
+	return render_to_response('blog.html')
+	
 
 
 def show_category(request, category_slug):
