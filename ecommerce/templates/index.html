@@ -24,7 +24,7 @@
 						{% endthumbnail %}
 						<div class="category">
 							<i class="icon-tag icon-white"></i>
-							<a href="{% url ecommerce.store.views.show_category item.categories.get_absolute_url %}">{{ item.categories }}</a>
+							<a href="{% url 'ecommerce.store.views.show_category' item.categories.get_absolute_url %}">{{ item.categories }}</a>
 						</div>
 						<div class="caption">
 							<h4>{{ item.name }}</h4>
