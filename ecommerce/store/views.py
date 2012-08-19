@@ -55,8 +55,6 @@ def sell(request):
 def blog(request):
 	return render_to_response('blog.html')
 	
-
-
 def show_category(request, category_slug):
 	c = get_object_or_404(Category, slug=category_slug)
 	items = c.item_set.all()
