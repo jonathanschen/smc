@@ -123,7 +123,7 @@ INSTALLED_APPS = (
 	'sorl.thumbnail',
 	'paypal.standard',
 	'paypal.pro',
-	'disqus',
+#	'disqus',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
