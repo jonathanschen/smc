@@ -76,25 +76,25 @@
 					class="caret" /></b></a>
 					<ul class="dropdown-menu">
 						<li>
-							<a class="iconed" href="/purchases/">
+							<a class="iconed" href="{% url ecommerce.accounts.views.my_purchases %}">
 								<i class="icon-shopping-cart"></i>
 								My Purchases
 							</a>
 						</li>
 						<li>
-							<a class="iconed" href="/orders/">
+							<a class="iconed" href="{% url ecommerce.accounts.views.my_orders %}">
 								<i class="icon-inbox"></i>
 								My Orders
 							</a>
 						</li>
 						<li>
-							<a class="iconed" href="/accounts/my_items/">
+							<a class="iconed" href="{% url ecommerce.accounts.views.my_listed_items %}">
 								<i class="icon-tags"></i>
-								My Purses
+								My Store
 							</a>
 						</li>
 						<li>
-							<a class="iconed" href="{% url ecommerce.accounts.views.my_account %}">
+							<a class="iconed" href="{% url ecommerce.accounts.views.update_settings %}">
 								<i class="icon-cog"></i>
 								Settings
 							</a>

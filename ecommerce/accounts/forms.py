@@ -1,6 +1,7 @@
 from django import forms
-from ecommerce.accounts.models import UserProfile
+from ecommerce.accounts.models import UserProfile, Order
 from django.contrib.auth.forms import UserCreationForm
+
 
 
 class UserProfileForm(forms.ModelForm):
@@ -10,4 +11,8 @@ class UserProfileForm(forms.ModelForm):
 		exclude = ('user', 'activation_key',)
 		
 	
+class OrderInfoForm(forms.ModelForm):
 	
+	class Meta:
+		model = Order
+		

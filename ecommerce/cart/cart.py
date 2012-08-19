@@ -73,6 +73,6 @@ def cart_subtotal(request):
 	cart_total = decimal.Decimal('0.00')
 	cart_items = get_cart_items(request)
 	for cart_item in cart_items:
-		cart_total += cart_item.item_id.price * cart_item.quantity
+		cart_total += cart_item.item_id.price * cart_item.quantity + cart_item.item_id.shipping_price
 	return cart_total
 

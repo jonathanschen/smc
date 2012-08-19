@@ -4,7 +4,8 @@ from django.contrib.localflavor.us.models import PhoneNumberField
 from django.forms import ModelForm
 from django import forms
 from ecommerce.store.models import Item
-
+from paypal.pro.fields import CreditCardField, CreditCardExpiryField, CreditCardCVV2Field, CountryField
+import decimal
 
 class UserProfile(models.Model):
 	
@@ -33,36 +34,39 @@ class UserProfile(models.Model):
 		
 	def save(self, *args, **kwargs):
 		try:
-		    existing = UserProfile.objects.get(user=self.user)
-		    self.id = existing.id #force update instead of insert
+			existing = UserProfile.objects.get(user=self.user)
+			self.id = existing.id #force update instead of insert
 		except UserProfile.DoesNotExist:
-		    pass 
+			pass 
 		models.Model.save(self, *args, **kwargs)
 
 
 
 class Order(models.Model):
+
 	date = models.DateTimeField(auto_now_add=True)
-	user = models.ForeignKey(User, null=True)
+	buyer = models.ForeignKey(User, related_name="buyer")
 	transaction_id = models.CharField(max_length=20)
 	
-	email = models.EmailField(max_length=50)
-	phone = models.CharField(max_length=20)
+	email = models.EmailField(max_length=50, blank=True)
+	phone = models.CharField(max_length=20, blank=True)
 	
-	shipping_name = models.CharField(max_length=50)
+	shipping_firstname = models.CharField("First Name", max_length=50)
+	shpping_lastname = models.CharField("Last Name", max_length=50)
 	shipping_address_1 = models.CharField(max_length=50)
 	shipping_address_2 = models.CharField(max_length=50)
 	shipping_city = models.CharField(max_length=50)
 	shipping_state = models.CharField(max_length=2)
 	shipping_zip = models.CharField(max_length=10)
+
 	
-	billing_name = models.CharField(max_length=50) 
-	billing_address_1 = models.CharField(max_length=50) 
-	billing_address_2 = models.CharField(max_length=50, blank=True)
-	billing_city = models.CharField(max_length=50)
-	billing_state = models.CharField(max_length=2)
-	billing_country = models.CharField(max_length=50)
-	billing_zip = models.CharField(max_length=10)
+	firstname = models.CharField("Billing First Name", max_length=50)
+	lastname = models.CharField("Billing Last Name", max_length=50)
+	street = models.CharField(max_length=50) 
+	city = models.CharField(max_length=50)
+	state = models.CharField(max_length=2)
+	zip = models.CharField(max_length=10)
+
 	
 	def __unicode__(self):
 		return 'Order #' + str(self.id)
@@ -90,7 +94,7 @@ class OrderItem(models.Model):
 		return self.item.name
 	
 	def __unicode__(self):
-		return self.product.name
+		return self.item.name
 	
 	def get_absolute_url(self):
-		return self.product.get_absulute_url()
+		return self.item.get_absolute_url()

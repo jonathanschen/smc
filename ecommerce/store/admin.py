@@ -3,11 +3,13 @@ from ecommerce.store.models import *
 from ecommerce.store.forms import ItemAdminForm
 from ecommerce.accounts.models import UserProfile
 from ecommerce.accounts.forms import UserProfileForm
+from ecommerce.accounts.models import *
+
 
 class ItemAdmin(admin.ModelAdmin):
 	form = ItemAdminForm
 	
-	list_display = ('name', 'price', 'created',)
+	list_display = ('name', 'user', 'price', 'created',)
 	list_display_links = ('name',)
 	list_per_page = 100
 	ordering = ['-created']
@@ -32,4 +34,13 @@ class UserProfileAdmin(admin.ModelAdmin):
 	form = UserProfileForm
 
 admin.site.register(UserProfile, UserProfileAdmin)
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('lastname',)
+admin.site.register(Order, OrderAdmin)
+
+class OrderItemAdmin(admin.ModelAdmin):
+	list_display = ('order', 'item', 'price', 'quantity',)
+admin.site.register(OrderItem, OrderItemAdmin)
+
 	

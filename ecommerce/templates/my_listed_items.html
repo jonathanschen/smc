@@ -1,9 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for items in items_selling %}
 <div class="container">
-<p>{{ items }}</p>
-</div>
-{% endfor %}
+    <div class="row">
+		<div class="span12">
+				<table class="table table-striped">
+					<h3>
+						Items I'm Selling
+					</h3>
+					<tr>
+						<th>Item</th>
+						<th>Price</th>
+						<th>Description</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+					<tbody>
+						
+						{% for item in items_selling %} 
+						<tr>	
+							<td>
+							{{ item.name }}
+							</td>							
+							<td>
+							{{ item.price }}
+							</td>
+							<td>
+							{{ order_item.quantity }}
+							</td>
+							<td>
+							<a href="{% url ecommerce.accounts.views.edit_item item.id %}">Edit Item</a>
+							</td>
+							<td>
+							<a href="{% url ecommerce.accounts.views.delete_item item.id %}">Delete Item</a>
+							</td>
+						</tr>
+						{% endfor %}					
+					</tbody>
+				</table>
+			</div>
+    	</div>
+	</div>
+
+
+
 {% endblock %}

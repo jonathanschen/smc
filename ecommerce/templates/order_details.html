@@ -2,37 +2,55 @@
 
 
 {% block content %}
-	<table id="receipt">
-		<caption>
-			Details for this Order # {{ order.id }}
-		</caption>
-		<thread>
-		<tr>
-			<th scope="col">Name</th>
-			<th scope="col">Price</th>
-			<th scope="col">Quantity</th>
-			<th class="right" scope="col">Total</th>
-		</tr>
-		</thread>
-		<tfoot>
-			<tr>
-				<td colspad="4" class="right" style="height:30px;">
-				Order Total: {{ order.total|currency }}
-				</td>
-			</tr>
-		</tfoot>
-		<tbody>
-		{% for item in order_items %}
-		<tr>
-			<td>
-				<a href="{{ item.get_absolute_url }}">
-					{{ item.name }}
-				</a>
-			</td>
-			<td>{{ item.price|currency }}</td>
-			<td>{{ item.quantity }}</td>
-			<td class="right">{{ item.total|currency }}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
+<div class="container">
+    <div class="row">
+		<div class="span12">
+				<table class="table table-striped">
+					<h3>
+						Details for Order # {{ order.id }}
+					</h3>
+					<tr>
+						<th>Item</th>
+						<th>Price</th>
+						<th>Quantity</th>
+						<th>Total</th>
+					</tr>
+					<tbody>
+						
+						{% for order_item in order_items %} 
+						<tr>	
+							<td>
+							{{ order_item.name }}
+							</td>							
+							<td>
+							{{ order_item.price }}
+							</td>
+							<td>
+							{{ order_item.quantity }}
+							</td>
+							<td>
+							{{ order_item.total }}
+							</td>
+						</tr>
+						{% endfor %}					
+						<tr>
+							<td>
+							</td>
+							<td>
+							</td>
+							<td>
+							Grand Total:
+							</td>
+							<td>
+							{{ order.total }}	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+    	</div>
+	</div>
+
+
+
 {% endblock %}

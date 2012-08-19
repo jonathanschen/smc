@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+		<div class="span12">
+			<h2>My Purchases</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>Order Number</th>
+						<th>Order Details</th>
+						<th>Shipping Address</th>
+						<th>Total</th>
+					</tr>
+					<tbody>
+						<tr>
+						{% for order in my_orders %} 
+							<td>
+							{{ order.id }}
+							</td>							
+							<td>
+							<a href="{% url ecommerce.accounts.views.order_details order.id %}">Details>>></a>
+							</td>
+							<td>
+							{{ order.shipping_address_1 }}
+							{{ order.shipping_address_2}}
+							{{ order.city }}
+							{{ order.state }}
+							{{ order.zip }}
+							</td>
+							<td>
+							{{ order.total }}
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+    	</div>
+	</div>
+{% endblock %}

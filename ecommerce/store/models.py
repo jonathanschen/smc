@@ -22,7 +22,7 @@ class Category(models.Model):
 
 class Item(models.Model):
 	user = models.ForeignKey(User)
-	name = models.CharField(max_length=75)
+	name = models.CharField(max_length=30)
 	slug = models.SlugField(max_length=50, unique=True)
 	is_active = models.BooleanField(default=True, blank=True)
 	image1 =  models.ImageField(upload_to='img')
@@ -38,6 +38,12 @@ class Item(models.Model):
 	shipping_price = models.DecimalField(decimal_places=2, max_digits=6)
 	categories = models.ManyToManyField(Category)
 	
+	def save(self, *args, **kwargs):
+		super(Item, self).save(*args, **kwargs)
+		if not self.slug:
+			self.slug = slugify(self.product.title) + "-" + str(self.id)
+			self.save()
+
 	
 	class Meta:
 		db_table = 'items'

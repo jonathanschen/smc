@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container">
 <h1>Activation Complete!</h1>
-Thanks for activating! Start shopping! 
+Thanks for activating! Please login and start shopping! 
 <br />
 <br />
 <a href="{% url ecommerce.store.views.index %}">Continue Shopping</a>
+
+</div>
 {% endblock %}

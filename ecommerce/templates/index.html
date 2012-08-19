@@ -24,12 +24,12 @@
 						{% endthumbnail %}
 						<div class="category">
 							<i class="icon-tag icon-white"></i>
-							<a href="#">Dresses</a>
+							<a href="{% url ecommerce.store.views.show_category 'dress' %}">Dresses</a>
 							<a href="#">Shirts</a>
 						</div>
 						<div class="caption">
-							<h2>item.title</h2>
-							<p>item.description</p> <!-- make this a maximum of 3 lines???-->	
+							<h4>{{ item.name }}</h4>
+							<p>{{ item.description|truncatechars:50 }}<p> <!-- make this a maximum of 3 lines???-->	
 							<hr>
 							<p><a class="btn" href="{{ item.get_absolute_url }}">Read on →</a></p>
 						</div>

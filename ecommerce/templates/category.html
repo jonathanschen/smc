@@ -1,20 +1,43 @@
 {% extends "base.html" %}
 
+{% load thumbnail %}
+
+
 {% block content %}
 <div class="container">
-	<h1>{{ c.name }}
-	<br />
-	<br />
-	{% for item in items %}
-		<div class="product_thumbnail">
-			<a href="{{ item.get_absolute_url }}">
-				<img src="{{ STATIC_URL }}img/{{ item.image }}"
-				alt="{{ item.name }}" class="bn" />
-				<br />
-				{{ item.name }}
-			</a>
-		</div>
-	{% endfor %}
+<div class="row">
+	<div id="content" class="span12">
+		<h3>Tag: {{ c.name }}</h3>
+		<ul class="thumbnails">
+			{% for item in items %}
+			<li class="span3">
+				<div class="thumbnail">
+					{% thumbnail item.image1 "275x150" crop='center' as im %}
+						<a href='{{ item.get_absolute_url }}'> 
+							<img src='{{ MEDIA_URL }}{{ item.image1 }}' 
+							width = '{{ im.width }}' height= "{{ im.height }}"
+							alt="{{ item.name }}" class="bn" />
+						</a>
+					{% endthumbnail %}
+					<div class="category">
+						<i class="icon-tag icon-white"></i>
+						<a href="{% url ecommerce.store.views.show_category 'dress' %}">Dresses</a>
+						<a href="#">Shirts</a>
+					</div>
+					<div class="caption">
+						<h4>c.title</h4>
+						<p>c.description</p> <!-- make this a maximum of 3 lines???-->	
+						<hr>
+						<p><a class="btn" href="{{ item.get_absolute_url }}">Read on →</a></p>
+					</div>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
 </div>
+</div>
+
+
 {% endblock %}
 				

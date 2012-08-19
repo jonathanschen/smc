@@ -35,5 +35,8 @@ class AddItem(forms.ModelForm):
 	class Meta:
 		model = Item
 		exclude = ('user','slug','is_active',)
-	
-	
+
+class ContactForm(forms.Form):
+	name = forms.CharField(max_length=100)
+	message = forms.CharField()
+	email = forms.EmailField()

@@ -15,7 +15,7 @@ urlpatterns = patterns('',
 	url(r'^cart/', include('ecommerce.cart.urls')),
     url(r'^some/obscure/name/', include('paypal.standard.ipn.urls')),
     url(r'^about/', direct_to_template, {'template':'about.html'}),
-    url(r'^contact/', direct_to_template,{'template': 'contact.html'}),
+
 
 
     # url(r'^$', 'ecommerce.views.home', name='home'),

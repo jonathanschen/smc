@@ -19,33 +19,31 @@
 						</div>
 						<div class="caption">
 							<h2>Contact</h2>
-							<div class="alert alert-error">
-								<button class="close" data-dismiss="alert" type="button">×</button>
-								<strong>Oh snap!</strong>Change a few things up and try submitting again.
-							</div>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert" type="button">×</button>
-								<strong>Well done!</strong>
-								Your message sent successfully.
-							</div>
-							<form class="form-horizontal">
+							<form class="form-horizontal" action="." method="post">{% csrf_token %}
+								{% if errors %}
+								<div class="alert alert-error">
+									<button class="close" data-dismiss="alert" type="button">×</button>
+									<strong>Oh snap!</strong>Change a few things up and try submitting again.
+								</div>
+								{% endif %}								
 								<fieldset>
 									<div class="control-group">
 										<label class="control-label" for="input01">E-mail</label>
 										<div class="controls">
-											<input id="input01" class="input-xlarge" type="email">
+											<input id="input01" class="input-xlarge" name="email" type="email">
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label" for="input02">Name</label>
 										<div class="controls">
-											<input id="input02" class="input-xlarge" type="text">
+											<input id="input02" class="input-xlarge" name="name" type="text">
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label" for="textarea">Message</label>
 										<div class="controls">
-											<textarea id="textarea" class="input-xlarge" rows="3"></textarea>
+											<textarea id="textarea" class="input-xlarge" name="message" 			
+											rows="3"></textarea>
 										</div>
 									</div>
 									<div id="contact-submit" class="form-actions">

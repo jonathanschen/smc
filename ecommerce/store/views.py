@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-import time 
+import time
 from calendar import month_name
 from django.core import urlresolvers
 from ecommerce.cart import cart
@@ -17,7 +17,8 @@ from ecommerce.store.forms import AddItem
 from django.template.defaultfilters import slugify
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.contrib.auth import logout
-
+from ecommerce.store.forms import ContactForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
 	page_title = 'TaiDai Heaven'
@@ -36,6 +37,7 @@ def index(request):
 		
 	return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 
+@login_required
 def sell(request):
 	if request.method == "POST":
 		form = AddItem(request.POST, request.FILES)
@@ -45,13 +47,11 @@ def sell(request):
 			item.is_active = True
 			item.slug = slugify(item.name)
 			item.save()
-			return HttpResponseRedirect('thanks.html')		
-	if request.user.is_authenticated():
-		form = AddItem()
-		return render_to_response('forsale.html', locals(), context_instance=RequestContext(request))
+			return render_to_response('thanks.html')	
 	else:
-		url = urlresolvers.reverse('registration.views.register')
-		return HttpResponseRedirect(url)
+		form = AddItem()
+	return render_to_response('forsale.html', locals(), context_instance=RequestContext(request))
+
 
 def show_category(request, category_slug):
 	c = get_object_or_404(Category, slug=category_slug)
@@ -77,5 +77,20 @@ def show_item(request, item_slug):
 	form.fields['item_slug'].widget.attrs['value'] = item_slug
 	request.session.set_test_cookie()
 	return render_to_response('item.html', locals(), context_instance=RequestContext(request))
+
+def contact(request):	
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			name = form.cleaned_data['name']
+			message = form.cleaned_data['message']
+			email = form.cleaned_data['email']
+
+			recipients = ['jonathanschen@gmail.com']
+			send_mail(name, message, email, recipients)	
+			return HttpResponseRedirect('/thanks/')
+	else:
+		form = ContactForm()
+	return render(request, 'contact.html', {'form':form,})
 
 

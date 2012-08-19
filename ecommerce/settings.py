@@ -1,4 +1,6 @@
 import os
+import dj_database_url
+
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__).decode('utf-8'))
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
@@ -12,16 +14,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'storedb',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
+DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -130,6 +123,7 @@ INSTALLED_APPS = (
 	'sorl.thumbnail',
 	'paypal.standard',
 	'paypal.pro',
+	'disqus',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -162,7 +156,8 @@ LOGGING = {
         },
     }
 }
-
+DISQUS_API_KEY = 'FOOBARFOOBARFOOBARFOOBARFOOBARF'
+DISQUS_WEBSITE_SHORTNAME = 'foobar'
 PAYPAL_RECEIVER_EMAIL = 'jsc37_1345062968_biz@gmail.com'
 PAYPAL_TEST = True
 PAYPAL_WPP_USER = 'jsc37_1345062968_biz_api1.gmail.com'
