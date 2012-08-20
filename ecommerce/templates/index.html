@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container" id='homepage'>
 
 
 
@@ -23,8 +23,10 @@
 							</a>
 						{% endthumbnail %}
 						<div class="category">
+						{% for category in item.categories.all %}
 							<i class="icon-tag icon-white"></i>
-							<a href="#">{{ item.categories }}</a>
+							<a href="{{ category.get_absolute_url }}">{{ category }}</a>
+						{% endfor %}
 						</div>
 						<div class="caption">
 							<h4>{{ item.name }}</h4>

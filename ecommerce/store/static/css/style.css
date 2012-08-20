@@ -32,6 +32,29 @@ div.thumbnail {
     padding: 0;
 }
 
+
+#blog, #homepage, #my_purchases  {
+	
+	min-height:325px;
+}
+
+#login, #my_store,  #my_orders {
+	
+	min-height:350px;
+}
+
+#cart, #complete, #registration, #sell, #thanks, #success, #activate {
+	
+	min-height:400px;
+}
+
+
+#my_account, #logout, #settings{
+	
+	min-height:450px;
+}
+
+
 div.thumbnail > div.caption hr {
     border-style: dotted;
 }
@@ -105,13 +128,12 @@ hr{
 footer {
 	background: none repeat scroll 0 0 #111111;
     border-top: 1px solid #292929;
-	bottom:0;
 	color: #999999;
     margin-top: 20px;
     margin-bottom: -40px;
 	padding: 15px;
-	position:fixed;
-	height: 150 px;
+	position: relative;
+	height: 100%;
 	width: 100%;
 }
 
@@ -127,36 +149,4 @@ footer a:hover{
 	text-decoration: none;	
 }
 
-.FB{
-    background: url("http://www.etsuei.com/css/../images/social/16x16/Facebook.png") no-repeat scroll 0 0 transparent;
-    cursor: pointer;
-    float: left;
-    height: 16px;
-    width: 16px;
-    padding: 2px;
-}
 
-.TW {
-    background: url("http://www.etsuei.com/css/../images/social/16x16/Twitter.png") no-repeat scroll 0 0 transparent;
-    cursor: pointer;
-    float: left;
-    height: 16px;
-    width: 16px;
-    padding: 2px;
-}
-.LI {
-    background: url("http://www.etsuei.com/css/../images/social/16x16/LinkedIn.png") no-repeat scroll 0 0 transparent;
-    cursor: pointer;
-    float: left;
-    height: 16px;
-    width: 16px;
-    padding: 2px;
-}
-.GP {
-    background: url("//ssl.gstatic.com/images/icons/gplus-16.png") no-repeat scroll 0 0 transparent;
-    cursor: pointer;
-    float: left;
-    height: 16px;
-    width: 16px;
-    padding: 2px;
-}

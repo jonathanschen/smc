@@ -4,18 +4,20 @@ from django import forms
 from django.contrib.auth.models import User
 from sorl.thumbnail import get_thumbnail
 
+
 class Category(models.Model):
 	name = models.CharField(max_length=75)
 	slug = models.SlugField(max_length=75, unique=True)
 	is_active = models.BooleanField(default=True)
 	
+	def __unicode__(self):
+		return self.name
+	
 	class Meta:
 		db_table = 'categories'
 		verbose_name_plural = 'Categories'
 	
-	def __unicode__(self):
-		return self.name
-	
+
 	@models.permalink
 	def get_absolute_url(self):
 		return ("ecommerce.store.views.show_category",[str(self.slug)])

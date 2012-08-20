@@ -20,13 +20,14 @@
 						</a>
 					{% endthumbnail %}
 					<div class="category">
+					{% for category in item.categories.all %}
 						<i class="icon-tag icon-white"></i>
-						<a href="{% url ecommerce.store.views.show_category 'dress' %}">Dresses</a>
-						<a href="#">Shirts</a>
+						<a href="{{ category.get_absolute_url }}">{{ category }}</a>
+					{% endfor %}
 					</div>
 					<div class="caption">
-						<h4>c.title</h4>
-						<p>c.description</p> <!-- make this a maximum of 3 lines???-->	
+						<h4>{{ item.name }}</h4>
+						<p>{{ item.description|truncatechars:50 }}</p> <!-- make this a maximum of 3 lines???-->	
 						<hr>
 						<p><a class="btn" href="{{ item.get_absolute_url }}">Read on →</a></p>
 					</div>

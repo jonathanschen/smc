@@ -47,6 +47,7 @@ def sell(request):
 			item.is_active = True
 			item.slug = slugify(item.name)
 			item.save()
+			form.save_m2m()
 			return render_to_response('thanks.html')	
 	else:
 		form = AddItem()
