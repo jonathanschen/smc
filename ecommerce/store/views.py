@@ -20,6 +20,7 @@ from django.contrib.auth import logout
 from ecommerce.store.forms import ContactForm
 from django.contrib.auth.decorators import login_required
 
+
 def index(request):
 	page_title = 'TaiDai Heaven'
 	items = Item.objects.all().order_by("-created")

@@ -2,6 +2,12 @@ import dj_database_url
 import os
 
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__).decode('utf-8'))
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_ACCESS_KEY_ID = 'AKIAIHY3KM3YKXYQ3IUQ'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'taidai'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 DEBUG = True
@@ -14,10 +20,20 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://localhost')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'awa',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
 }
+
+#DATABASES = {
+#    'default': dj_database_url.config(default='postgres://localhost')
+#}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -52,7 +68,7 @@ MEDIA_ROOT = os.path.join(CURRENT_PATH, 'ecommerce', 'store', 'static')
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://s3.amazonaws.com/taidai/'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -61,7 +77,7 @@ STATIC_ROOT = '/Users/jonathanschen/Python/projects/skeleton/ecommerce/ecommerce
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = 'https://s3.amazonaws.com/taidai'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -126,6 +142,7 @@ INSTALLED_APPS = (
 	'sorl.thumbnail',
 	'paypal.standard',
 	'paypal.pro',
+	'storages',
 
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
