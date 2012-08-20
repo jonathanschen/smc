@@ -62,7 +62,7 @@ def update_settings(request):
 			form = UserProfileForm(instance=u)
 		except ObjectDoesNotExist:
 			form = UserProfileForm()
-		return render_to_response('registration/update_settings.html', locals(), context_instance=RequestContext(request))
+	return render_to_response('registration/update_settings.html', locals(), context_instance=RequestContext(request))
 
 def logout_view(request):
 	logout(request)
@@ -103,7 +103,7 @@ def edit_item(request, item_id):
 			item.is_active = True
 			item.slug = slugify(item.name)
 			item.save()
-			return HttpResponseRedirect('thanks.html')
+			return render_to_response('thanks.html', locals(), context_instance=RequestContext(request))
 		else:
 			form = AddItem(instance=item )
 			return render_to_response('forsale.html', locals(), context_instance=RequestContext(request))

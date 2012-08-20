@@ -7,12 +7,13 @@ AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 DEBUG = True
 THUMBNAIL_DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-URL = 'http://127.0.0.1:8000/'
+URL = 'http://blooming-depths-4028.herokuapp.com/'
 ADMINS = (
     # ('Jonathan Chen', 'jonathanschen@gmail.com'),
 )
 
 MANAGERS = ADMINS
+
 
 DATABASES = {
     'default': dj_database_url.config(default='postgres://localhost')

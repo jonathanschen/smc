@@ -33,17 +33,17 @@ div.thumbnail {
 }
 
 
-#blog, #homepage, #my_purchases  {
+#thanks, #blog, #homepage, #my_purchases, #settings_complete {
 	
 	min-height:325px;
 }
 
-#login, #my_store,  #my_orders {
+#login, #my_store,  #my_orders, #sure {
 	
 	min-height:350px;
 }
 
-#cart, #complete, #registration, #sell, #thanks, #success, #activate {
+#cart, #complete, #registration, #sell, #success, #activate {
 	
 	min-height:400px;
 }
