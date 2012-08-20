@@ -126,7 +126,7 @@ INSTALLED_APPS = (
 	'sorl.thumbnail',
 	'paypal.standard',
 	'paypal.pro',
-#	'disqus',
+
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -162,7 +162,7 @@ LOGGING = {
 DISQUS_API_KEY = 'dW5RaIZ0T8po4YTAOp94DVjiQoI5fai7aHWmfiroCAbNcydiZg9BfqYlP2UWtjCH'
 DISQUS_WEBSITE_SHORTNAME = 'taidai'
 PAYPAL_RECEIVER_EMAIL = 'jsc37_1345062968_biz@gmail.com'
-PAYPAL_TEST = True
+PAYPAL_TEST = False
 PAYPAL_WPP_USER = 'jsc37_1345062968_biz_api1.gmail.com'
 PAYPAL_WPP_PASSWORD = '1345062991'
 PAYPAL_WPP_SIGNATURE = 'ALBsd9K1rmWR.udv3uRzD1e0fV6RAY6cC7rjgrI9zyC9wJQSPeLu4cV5'
