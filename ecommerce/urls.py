@@ -13,7 +13,6 @@ urlpatterns = patterns('',
 	url(r'^accounts/', include('registration.backends.default.urls')),
 	url(r'^accounts/', include('django.contrib.auth.urls')),
 	url(r'^cart/', include('ecommerce.cart.urls')),
-    url(r'^some/obscure/name/', include('paypal.standard.ipn.urls')),
     url(r'^about/', direct_to_template, {'template':'about.html'}),
 
 
