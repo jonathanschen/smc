@@ -4,7 +4,6 @@ boto==2.5.2
 distribute==0.6.24
 dj-database-url==0.2.1
 django-disqus==0.4.1
-django-paypal==0.1.2
 django-registration==0.8
 django-storages==1.1.5
 gunicorn==0.14.6
