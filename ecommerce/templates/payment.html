@@ -3,6 +3,8 @@
 {% block content %}
 <div class="container">
 <form action="" method="post">{% csrf_token %}
+	
+	<p>Is this iash for real</p>
     <table>
         <tbody>
             {% if errors %}<tr><td colspan="2" align="center">{{ errors }}</td></tr>{% endif %}
