@@ -1,4 +1,4 @@
-Activate your account at http://127.0.0.1:8000:
+Activate your account at http://blooming-depths-4028.herokuapp.com/:
 
-http://127.0.0.1:8000{% url registration_activate activation_key %}
+http://blooming-depths-4028.herokuapp.com{% url registration_activate activation_key %}
 
