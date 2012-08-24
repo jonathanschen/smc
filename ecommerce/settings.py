@@ -1,4 +1,4 @@
-import dj_database_url
+#import dj_database_url
 import os
 
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__).decode('utf-8'))
@@ -20,20 +20,20 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#        'NAME': 'awa',                      # Or path to database file if using sqlite3.
-#        'USER': '',                      # Not used with sqlite3.
-#        'PASSWORD': '',                  # Not used with sqlite3.
-#        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-#        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-#    }
-#}
-
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://localhost')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'awa',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
 }
+
+#DATABASES = {
+#    'default': dj_database_url.config(default='postgres://localhost')
+#}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -136,7 +136,6 @@ INSTALLED_APPS = (
     'ecommerce.store',
 	'ecommerce.accounts',
 	'ecommerce.cart',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
 	'registration',
 	'sorl.thumbnail',
@@ -178,7 +177,7 @@ LOGGING = {
 }
 DISQUS_API_KEY = 'dW5RaIZ0T8po4YTAOp94DVjiQoI5fai7aHWmfiroCAbNcydiZg9BfqYlP2UWtjCH'
 DISQUS_WEBSITE_SHORTNAME = 'taidai'
-PAYPAL_RECEIVER_EMAIL = 'jsc37_1345062968_biz@gmail.com'
+PAYPAL_RECEIVER_EMAIL = 'jonathan.s.chen@gmail.com'
 PAYPAL_TEST = False
 PAYPAL_WPP_USER = 'jsc37_1345062968_biz_api1.gmail.com'
 PAYPAL_WPP_PASSWORD = '1345062991'

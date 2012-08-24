@@ -60,21 +60,32 @@
 			</li>
 		</ul>
 		{% if not user.is_authenticated %}
-			<ul class="nav pull-right">
-				<li id="login_menu" class="dropdown">
+			<!--<ul class="nav pull-right">-->
+				<!-- Button to trigger modal -->
+				<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+				<!-- Modal -->
+				<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				    <h3 id="myModalLabel">Login</h3>
+				  </div>
+				  <div class="modal-body">
+				    <p>One fine body…</p>
+				  </div>
+				  <div class="modal-footer">
+				    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				    <button class="btn btn-primary">Save changes</button>
+				  </div>
+				</div>
+				
+				
+				
+<!--				<li id="login_menu" class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="/accounts/login/"
 					style="padding-right: 16px;height:100%"><strong>Sign in</strong><span
 					class="caret" /></a>
-					<ul class="dropdown-menu dropdown-form">
-						<li>
-							<form action="/accounts/login/" method="post">{% csrf_token %}
-								{{ form.as_table}}
-								<button type="submit" class="btn btn-secondary">Submit</button>
-							</form>
-						</li>
-					</ul>
 				</li>
-			</ul>
+			</ul>-->
 		{% else %}
 			<ul class="nav pull-right">
 				<li><a href="{% url ecommerce.cart.views.show_cart %}">Cart</a></li>
